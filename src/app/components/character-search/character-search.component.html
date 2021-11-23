@@ -1,9 +1,52 @@
-<h1>Búscador de personajes</h1>
+<div class="row justify-content-center mt-5">
+    <h1>Buscador de personajes</h1>
+</div>
 
-<form>
-    <input type="text" name="query" [(ngModel)]="query" />
-    <input type="submit" value="Buscar" (click)="search()" />
+<!-- Busqueda por Nombre -->
+<form #searchChar="ngForm">
+
+    <div class="row justify-content-center">
+        <mat-form-field class="col-sm-6" appearance="outline" class="col-sm-3">
+            <mat-label>Buscar por Nombre</mat-label>
+            <input matInput type="text" name="name" #name="ngModel" [(ngModel)]="charname" placeholder="Nombre de personaje" required />
+            <mat-error *ngIf="name.invalid && (name.dirty || name.touched)">El nombre de personaje es
+                <strong>obligatorio</strong>
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="row justify-content-center">
+        <button class="col-sm-2 mb-4" mat-raised-button color="primary" (click)="searchByName(name)" [disabled]="name.invalid && (name.dirty || name.touched)">Buscar por Nombre</button>
+    </div>
+
+    <!-- Busqueda por ID -->
+    <div class="row justify-content-center">
+        <mat-form-field class="col-sm-6" appearance="outline" class="col-sm-3">
+            <mat-label>Buscar por ID</mat-label>
+            <input matInput type="text" name="id" #id="ngModel" [(ngModel)]="charId" placeholder="ID de personaje" required />
+            <mat-error *ngIf="id.invalid && (id.dirty || id.touched)">El ID del personaje es
+                <strong>obligatorio</strong>
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="row justify-content-center">
+        <button class="col-sm-2 mb-4" mat-raised-button color="primary" (click)="searchById(id)" [disabled]="id.invalid && (id.dirty || id.touched)">Buscar por ID</button>
+    </div>
 </form>
 
-<p>Parámetro de búsqueda: {{ query }}</p>
-<p>Resultado: {{ result }}</p>
+<!-- Show cards -->
+<div class="container">
+    <mat-grid-list class="mt-5" cols="4" rowHeight="400px">
+        <mat-grid-tile *ngFor="let character of charactersSearch ">
+            <mat-card class="card-character ">
+                <mat-card-header>
+                    <mat-card-title>
+                        <a routerLink="/detail/{{ character.id }}">{{ character.name }}</a></mat-card-title>
+                </mat-card-header>
+                <img mat-card-image [src]="character.image " />
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+</div>

@@ -10,11 +10,13 @@ export class AllCharactersComponent implements OnInit {
 
   public characters: any[] = [];
   public messageNoResults: string = '';
+  
 
   constructor(private charactersService: RickMortyService) { }
 
   ngOnInit(): void {
 
+    // Obtain all characters
     this.messageNoResults = '';
     this.charactersService.getCharacters().subscribe(
       (data) => {

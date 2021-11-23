@@ -1,12 +1,16 @@
-<ul>
-    <li *ngFor="let character of characters">
-        <a routerLink="/detail/{{ character.id }}">
-            <div class="card">
-                <div class="cardname">
-                    <p>{{ character.name }}</p>
-                </div>
-                <figure><img [src]="character.image" /></figure>
-            </div>
-        </a>
-    </li>
-</ul>
+<!-- Show all characters in cards -->
+
+<div class="container">
+
+    <mat-grid-list class="mt-5" cols="5" rowHeight="270px">
+        <mat-grid-tile *ngFor="let character of characters">
+            <mat-card class="card-character">
+                <mat-card-header>
+                    <mat-card-title> <a routerLink="/detail/{{ character.id }}">{{ character.name }}</a></mat-card-title>
+                </mat-card-header>
+                <img mat-card-image [src]="character.image" />
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+</div>

@@ -1,7 +1,30 @@
-<!-- <app-home></app-home> -->
+<!-- Toolbar Menu -->
+<mat-toolbar color="primary">
+    <a class="gap" routerLink="/home">
+        <span>Rick & Morty App</span>
+    </a>
 
-<!-- <app-character-search labelButton="buscar"></app-character-search> -->
+    <!-- Class for give space in menu -->
+    <span class="example-spacer"></span>
 
-<!-- <app-all-characters></app-all-characters> -->
+    <a class="gap" routerLink="/home">
+        <mat-icon class="example-icon">home</mat-icon>
+        Home
+    </a>
+    <a class="gap" routerLink="/all-character">
+        <mat-icon class="example-icon">list</mat-icon>
+        Mostrar Listado
+    </a>
+    <a class="gap" routerLink="/characters-table">
+        <mat-icon class="example-icon">table_chart</mat-icon>
+        Tabla Personajes
+    </a>
+    <a class="gap" routerLink="/character-search">
+        <mat-icon class="example-icon">search</mat-icon>
+        Buscar Personajes
+    </a>
+
+</mat-toolbar>
+
 
 <router-outlet></router-outlet>

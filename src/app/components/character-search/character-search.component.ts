@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { RickMortyService } from 'src/app/services/rick-morty.service';
 
 @Component({
   selector: 'app-character-search',
@@ -7,24 +8,56 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class CharacterSearchComponent implements OnInit {
 
-  public query: string ="";
-  public result: string = "";
-  
+  public query: string;
+  public result: string = '';
   @Input() labelButton: string = '';
-  @Output() searchEvent = new EventEmitter();
-
-  constructor() {
-
-    // this.query="";
-   }
-
-  ngOnInit(): void {
+  public charactersSearch: any;
+  public messageNoResults: string = '';
+  public charname: string = '';
+  public charId:string = "" ;
+  
+  constructor(private rickmortyService: RickMortyService) {
+    this.query = '';
   }
 
-  search() {
-    
-    this.result = `Consulta realizada con jquery ${this.query}`;
-    this.searchEvent.emit({ query: this.query, resultado: this.result });
-  }
+ngOnInit():void{}
+
+
+// Method search by Name
+  searchByName(form: any) {
+
+    if (form.valid) {
+      this.rickmortyService.getCharactersByName(form.value).subscribe(
+        (data) => {
+          this.charactersSearch = data.results;
+          this.messageNoResults = '';
+        },
+        (error) => {
+          this.charactersSearch = [];
+          this.messageNoResults =
+            'Consulta errónea. No se encontraron resultados.';
+        }
+      );
+    }
+  }//end searchbyName
+
+  // Method search by ID
+  searchById(form: any) {
+
+    if (form.valid) {
+      this.rickmortyService.getCharactersById(form.value).subscribe(
+        (data) => {
+          this.charactersSearch = [data];
+          this.messageNoResults = '';
+        },
+        (error) => {
+          this.charactersSearch = [];
+          this.messageNoResults =
+            'Consulta errónea. No se encontraron resultados.';
+        }
+      );
+    }
+  }//end searchbyId
+
 
 }
