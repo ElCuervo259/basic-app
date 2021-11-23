@@ -1,0 +1,9 @@
+<h1>Búscador de personajes</h1>
+
+<form>
+    <input type="text" name="query" [(ngModel)]="query" />
+    <input type="submit" value="Buscar" (click)="search()" />
+</form>
+
+<p>Parámetro de búsqueda: {{ query }}</p>
+<p>Resultado: {{ result }}</p>
